@@ -4,7 +4,11 @@
   "description": "Seed repository for front-end built with node scripting",
   "main": "./src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prebuild": "rm -rf ./dist/ && mkdir ./dist",
+    "build:js": "uglifyjs ./src/index.js > ./dist/index.js",
+    "build:html": "html-minifier --collapse-whitespace ./src/index.html --output ./dist/index.html",
+    "build": "npm run build:html && npm run build:js"
   },
   "repository": {
     "type": "git",
@@ -22,5 +26,10 @@
   "bugs": {
     "url": "https://github.com/alexoconner/node-webapp-generator/issues"
   },
-  "homepage": "https://github.com/alexoconner/node-webapp-generator#readme"
+  "homepage": "https://github.com/alexoconner/node-webapp-generator#readme",
+  "devDependencies": {
+    "babelify": "^6.3.0",
+    "html-minifier": "^0.7.2",
+    "uglify-js": "^2.4.24"
+  }
 }
