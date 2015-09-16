@@ -6,7 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prebuild": "rm -rf ./dist/ && mkdir ./dist",
-    "build:js": "uglifyjs ./src/index.js > ./dist/index.js",
+
+    "build:js": "DEBUG=true browserify ./src/index.js -t babelify > ./dist/index.js",
+    "make:js": "browserify ./src/index.js -t babelify | uglifyjs > ./dist/index.js",
+
     "build:html": "html-minifier --collapse-whitespace ./src/index.html --output ./dist/index.html",
     "build": "npm run build:html && npm run build:js"
   },
@@ -29,6 +32,7 @@
   "homepage": "https://github.com/alexoconner/node-webapp-generator#readme",
   "devDependencies": {
     "babelify": "^6.3.0",
+    "browserify": "^11.1.0",
     "html-minifier": "^0.7.2",
     "uglify-js": "^2.4.24"
   }
